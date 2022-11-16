@@ -1,0 +1,25 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'config/**/*'
+    - 'test/**/*'
+    - 'bin/*'
+    - 'node_modules/**/*'
+Metrics/BlockLength:
+  Enabled: false
+Naming/VariableNumber:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Style/MixinUsage:
+  Enabled: false
+Layout/HashAlignment:
+  Enabled: false
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
