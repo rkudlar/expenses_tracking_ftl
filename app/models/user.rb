@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :records
 
   validates :email, uniqueness: true
-  validates :username, uniqueness: true
+  validates :username, uniqueness: true, length: { minimum: 5 }
 end

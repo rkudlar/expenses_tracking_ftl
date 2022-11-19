@@ -30,6 +30,7 @@ group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'

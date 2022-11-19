@@ -9,7 +9,7 @@ import { BACKEND_PATHS, UI_PATHS } from "../../packs/constants";
 
 function Header() {
 
-  const handleSignOut = event => {
+  const handleSignOut = () => {
     const token = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
     axios.delete(`${BACKEND_PATHS.USER_SIGN_OUT}`, {

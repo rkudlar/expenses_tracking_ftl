@@ -5,7 +5,7 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require_relative '../config/environment'
 
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 
 begin
@@ -32,7 +32,6 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.include Support::FactoryHelpers
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
 end

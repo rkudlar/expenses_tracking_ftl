@@ -38,7 +38,7 @@ module Api
     end
 
     def record
-      @record = Record.find(params[:id])
+      @record = current_user.records.find(params[:id])
     end
   end
 end
