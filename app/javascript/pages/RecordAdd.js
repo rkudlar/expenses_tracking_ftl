@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
 import { BACKEND_PATHS } from "../packs/constants";
+import Header from "../components/Header/Header";
 
 function RecordAdd() {
   const [spent, setSpent] = useState("");
@@ -41,39 +42,42 @@ function RecordAdd() {
   }, [])
 
   return (
-    <Container>
-      <Form onSubmit={onSubmit}>
-        <Form.Group className="my-3">
-          <Form.Label>Spent</Form.Label>
-          <Form.Control className="input" type="text"
-                        placeholder="Spent"
-                        value={spent}
-                        onChange={(e) => setSpent(e.target.value)}/>
-        </Form.Group>
-        <Form.Group className="my-3">
-          <Form.Label>Description</Form.Label>
-          <Form.Control className="input" type="text"
-                        placeholder="Description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="my-3">
-          <Form.Label>Category</Form.Label>
-          <Form.Select onChange={e => handleCategoriesChange(e)}>
-            {categories.map((category) => (
-                <option key={category.id} value={category.id}>{category.name}</option>)
-            )}
-          </Form.Select>
-        </Form.Group>
-        <div className="input-button text-center my-3">
-          <Button
-            type="submit"
-            variant="outline-dark">
-            Create
-          </Button>
-        </div>
-      </Form>
-    </Container>
+    <>
+      <Header />
+      <Container>
+          <Form onSubmit={onSubmit}>
+            <Form.Group className="my-3">
+              <Form.Label>Spent</Form.Label>
+              <Form.Control className="input" type="text"
+                            placeholder="Spent"
+                            value={spent}
+                            onChange={(e) => setSpent(e.target.value)}/>
+            </Form.Group>
+            <Form.Group className="my-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control className="input" type="text"
+                            placeholder="Description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="my-3">
+              <Form.Label>Category</Form.Label>
+              <Form.Select onChange={e => handleCategoriesChange(e)}>
+                {categories.map((category) => (
+                    <option key={category.id} value={category.id}>{category.name}</option>)
+                )}
+              </Form.Select>
+            </Form.Group>
+            <div className="input-button text-center my-3">
+              <Button
+                type="submit"
+                variant="outline-dark">
+                Create
+              </Button>
+            </div>
+          </Form>
+        </Container>
+    </>
   );
 }
 
