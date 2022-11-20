@@ -1,7 +1,7 @@
 module Api
   class RecordsController < ApplicationController
     def index
-      @records = Record.where(user_id: current_user).order('created_at DESC')
+      @records = RecordsService.call(params[:owner_id], current_user)
     end
 
     def edit

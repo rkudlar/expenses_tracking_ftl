@@ -35,6 +35,7 @@ function Header() {
         <Nav className="me-auto container-fluid">
           <div className="collapse navbar-collapse justify-content-md-center">
             <NavLink exact to={'/'} className="nav-link">Home</NavLink>
+            <NavLink exact to={`${UI_PATHS.SHARE}`} className="nav-link">Share</NavLink>
             <NavLink exact to={`${UI_PATHS.RECORD_NEW}`} className="nav-link">Add record</NavLink>
             <button onClick={handleSignOut} className="btn custom-btn">Exit</button>
           </div>

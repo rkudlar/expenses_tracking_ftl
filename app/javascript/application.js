@@ -12,6 +12,7 @@ import { UI_PATHS } from "./packs/constants";
 const HomePage = lazy(() => import("./pages/Home"));
 const RecordEditPage = lazy(() => import("./pages/RecordEdit"));
 const RecordAddPage = lazy(() => import("./pages/RecordAdd"));
+const SharePage = lazy(() => import("./pages/Share"));
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/" component={HomePage} />
             <Route exact path={`${UI_PATHS.RECORD_NEW}`} component={RecordAddPage} />
             <Route exact path={`${UI_PATHS.RECORD_EDIT}`} component={RecordEditPage} />
+            <Route exact path={`${UI_PATHS.SHARE}`} component={SharePage} />
             <Redirect to="/" />
           </Switch>
         </Suspense>
