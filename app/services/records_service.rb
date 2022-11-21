@@ -1,5 +1,6 @@
 class RecordsService < ApplicationService
   def initialize(owner_id, current_user)
+    super
     @current_user_id = current_user.id
     @owner = User.find(owner_id.to_i) unless owner_id.nil?
   end
