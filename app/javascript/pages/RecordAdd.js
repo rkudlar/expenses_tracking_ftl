@@ -7,10 +7,10 @@ import Header from "../components/Header/Header";
 function RecordAdd() {
   const [spent, setSpent] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedСategory, setSelectedСategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState([]);
 
-  const handleCategoriesChange = (e) => {setSelectedСategory(categories[e.target.value])}
+  const handleCategoriesChange = (e) => {setSelectedCategory(categories[e.target.value])}
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ function RecordAdd() {
       record: {
         spent: spent,
         description: description,
-        category_id: selectedСategory.id
+        category_id: selectedCategory.id
       }
     })
       .then(function(response){
@@ -37,7 +37,7 @@ function RecordAdd() {
     axios.get(`${BACKEND_PATHS.CATEGORIES}`)
       .then(response => {
         setCategories(response.data);
-        setSelectedСategory(response.data[0])
+        setSelectedCategory(response.data[0])
       }).catch(error => console.log(error))
   }, [])
 
@@ -63,8 +63,8 @@ function RecordAdd() {
             <Form.Group className="my-3">
               <Form.Label>Category</Form.Label>
               <Form.Select onChange={e => handleCategoriesChange(e)}>
-                {categories.map((category) => (
-                    <option key={category.id} value={category.id}>{category.name}</option>)
+                {categories.map((category, index) => (
+                    <option key={index} value={index}>{category.name}</option>)
                 )}
               </Form.Select>
             </Form.Group>

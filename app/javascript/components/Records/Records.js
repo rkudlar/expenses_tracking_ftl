@@ -6,6 +6,10 @@ import MapperSharing from "./MapperSharing";
 
 function Records(props) {
 
+  const total = props.records.reduce((total, record) => {
+    return total + record.spent;
+  }, 0);
+
   return (
     <>
       {
@@ -14,6 +18,7 @@ function Records(props) {
         props.records.length === 0 ?
           <p className="h4 text-center my-5">Select the user whose expenses you want to view</p> :
           <Container>
+            <p className="h2">Total: {total}</p>
             <table className="table table-hover">
               <thead>
               <tr>

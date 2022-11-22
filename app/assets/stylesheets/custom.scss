@@ -7,11 +7,17 @@
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
+
 @media (prefers-reduced-motion: reduce) {
   .custom-btn {
     transition: none;
   }
 }
+
 .custom-btn:hover, .custom-btn:focus {
   color: var(--bs-nav-link-hover-color);
+}
+
+.select-custom-size {
+  height: 3.5rem;
 }
