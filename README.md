@@ -1,24 +1,63 @@
-# README
+# Local configuration
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## To start your local server
 
-Things you may want to cover:
+* Install ruby version 3.0.1 with
 
-* Ruby version
+```sh
+rbenv install 3.0.1
+```
 
-* System dependencies
+or if you use rvm
 
-* Configuration
+```sh
+rvm install 3.0.1
+```
 
-* Database creation
+* Install rails version 7.0.4 with
 
-* Database initialization
+```sh
+gem install rails -v 7.0.4
+```
 
-* How to run the test suite
+* Use `bundle install` to install Ruby gems
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+bundle install
+```
 
-* Deployment instructions
+You can install `bundler` like this:
 
-* ...
+```sh
+gem install bundler
+```
+
+* Install Yarn dependencies with
+
+```sh
+yarn install
+```
+
+* Create database with
+
+```sh
+rails db:create
+```
+
+* Run migrations with
+
+```sh
+rails db:migrate
+```
+
+* Run seeds with
+
+```sh
+rails db:seed
+```
+
+* Run local server with
+
+```sh
+./bin/dev
+```
