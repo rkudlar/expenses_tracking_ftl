@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'root#index'
 
   namespace :api, defaults: { format: 'json' } do
-    resources :records, only: %i[index edit create update destroy]
+    resources :spent_records, only: %i[index edit create update destroy]
     resources :categories, only: %i[index]
     get 'users/share_with', to: 'users#share_with'
     get 'users/access_to', to: 'users#access_to'

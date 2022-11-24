@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Record, type: :model do
-  subject { create(:record) }
+RSpec.describe SpentRecord, type: :model do
+  subject { create(:spent_record) }
 
   it { expect(subject).to be_valid }
 
