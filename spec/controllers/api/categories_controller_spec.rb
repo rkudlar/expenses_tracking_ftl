@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::CategoriesController, type: :controller do
+RSpec.describe Api::V1::CategoriesController, type: :controller do
   render_views
 
   describe '#index' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::UsersController, type: :controller do
+RSpec.describe Api::V1::UsersController, type: :controller do
   render_views
 
   let!(:user_1) { create(:user, share_with: [user_2.id]) }
@@ -30,7 +30,7 @@ RSpec.describe Api::UsersController, type: :controller do
     it { expect(response.body).to include(user_1.username) }
     it { expect(response.body).to include(user_1.email) }
     it { expect(response.media_type).to eq('application/json') }
-    it { is_expected.to render_template('api/users/share_with') }
+    it { is_expected.to render_template('api/v1/users/share_with') }
   end
 
   describe '#start_sharing' do

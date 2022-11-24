@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::SpentRecordsController, type: :controller do
+RSpec.describe Api::V1::SpentRecordsController, type: :controller do
   render_views
 
   describe '#index' do
