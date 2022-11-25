@@ -10,7 +10,7 @@ function MapperOwner(props) {
     axios.delete(`${BACKEND_PATHS.RECORDS}/${id}`, {
     })
       .then(function(){
-        window.location.reload();
+        props.recordChanger(true)
       })
       .catch(function(error){
         console.log(error)

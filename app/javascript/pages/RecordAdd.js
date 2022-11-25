@@ -3,21 +3,24 @@ import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
 import { BACKEND_PATHS } from "../packs/constants";
 import Header from "../components/Header/Header";
+import FlashMessage from 'react-flash-message';
 
 function RecordAdd() {
   const [spent, setSpent] = useState("");
   const [description, setDescription] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState([]);
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleCategoriesChange = (e) => {setSelectedCategory(categories[e.target.value])}
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setShowMessage(false);
     const token = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
     axios.post(`${BACKEND_PATHS.RECORDS}`, {
-      record: {
+      spent_record: {
         spent: spent,
         description: description,
         category_id: selectedCategory.id
@@ -26,6 +29,9 @@ function RecordAdd() {
       .then(function(response){
         if (response.status === 200) {
           window.location.replace('/');
+        }
+        else {
+          setShowMessage(true)
         }
       })
       .catch(function(error){
@@ -45,6 +51,15 @@ function RecordAdd() {
     <>
       <Header />
       <Container>
+        { showMessage &&
+            <div>
+              <FlashMessage duration={5000}>
+                <div className="alert alert-danger mt-2" role="alert">
+                  Incorrect !
+                </div>
+              </FlashMessage>
+            </div>
+        }
           <Form onSubmit={onSubmit}>
             <Form.Group className="my-3">
               <Form.Label>Spent</Form.Label>

@@ -7,19 +7,21 @@ import Filter from "../components/Records/Filter";
 
 function Home() {
   const [records, setRecords] = useState([]);
+  const [recordsRefresh, setRecordsRefresh] = useState(false);
 
   useEffect(() => {
     axios.get(`${BACKEND_PATHS.RECORDS}`)
       .then(response => {
         setRecords(response.data);
+        setRecordsRefresh(false);
       }).catch(error => console.log(error))
-  }, [])
+  }, [recordsRefresh])
 
   return (
     <div>
       <Header />
       <Filter stateChangerRecords={setRecords} />
-      <Records records={records} owner={true}/>
+      <Records recordsChanger={setRecordsRefresh} records={records} owner={true}/>
     </div>
   );
 }

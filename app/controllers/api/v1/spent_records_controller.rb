@@ -11,21 +11,11 @@ module Api
 
       def create
         @spent_record = SpentRecord.new(spent_record_params.merge(user_id: current_user.id))
-        if @spent_record.save
-          flash[:success] = 'Created!'
-          redirect_to root_path, status: 303
-        else
-          flash[:danger] = 'Incorrect!'
-        end
+        head 200 if @spent_record.save
       end
 
       def update
-        if spent_record.update(spent_record_params)
-          flash[:success] = 'Updated!'
-          redirect_to root_path, status: 303
-        else
-          flash[:danger] = 'Incorrect!'
-        end
+        head 200 if spent_record.update(spent_record_params)
       end
 
       def destroy

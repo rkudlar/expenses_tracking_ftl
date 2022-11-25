@@ -1,5 +1,5 @@
 export const BACKEND_PATHS = {
-  RECORDS:        '/api/v1/records',
+  RECORDS:        '/api/v1/spent_records',
   CATEGORIES:     '/api/v1/categories',
   USER_SIGN_IN:   '/users/sign_in',
   USER_SIGN_OUT:  '/users/sign_out',
