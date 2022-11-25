@@ -11,9 +11,11 @@ module Api
       end
 
       def start_sharing
-        user_id = User.find_by(username: params[:username]).id
-        current_user.share_with << user_id
-        current_user.save!
+        user = User.find_by(username: params[:username])
+        return if user.nil?
+
+        current_user.share_with << user.id
+        head 200 if current_user.save!
       end
 
       def stop_sharing
