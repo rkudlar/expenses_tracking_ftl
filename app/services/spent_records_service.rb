@@ -22,8 +22,8 @@ class SpentRecordsService < ApplicationService
   def records_mapper(user)
     user.spent_records.order('created_at DESC').select do |record|
       (!@params[:from].blank? ? record.spent >= @params[:from].to_i : true) &&
-      (!@params[:to].blank? ? record.spent <= @params[:to].to_i : true) &&
-      (!@category_id.blank? ? record.category_id == @category_id : true)
+        (!@params[:to].blank? ? record.spent <= @params[:to].to_i   : true) &&
+        (!@category_id.blank? ? record.category_id == @category_id  : true)
     end
   end
 end

@@ -11,8 +11,9 @@ module Api
       end
 
       def start_sharing
-        user = User.find_by(username: params[:username])
-        return if user.nil?
+        return if (user = User.find_by(username: params[:username])).nil? ||
+                  user == current_user ||
+                  current_user.share_with.include?(user.id)
 
         current_user.share_with << user.id
         head 200 if current_user.save!

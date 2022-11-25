@@ -54,7 +54,7 @@ RSpec.describe Api::V1::SpentRecordsController, type: :controller do
     let(:category) { create(:category) }
     let(:params) { { spent_record: { spent: 100, user_id: user.id, category_id: category.id } } }
 
-    it { expect(response).to have_http_status(:see_other) }
+    it { expect(response).to have_http_status(:ok) }
     it { expect(assigns[:spent_record]).to be_instance_of(SpentRecord) }
     it { expect(assigns[:spent_record].spent).to eq(100) }
     it { expect(assigns[:spent_record].user_id).to eq(user.id) }
@@ -70,9 +70,8 @@ RSpec.describe Api::V1::SpentRecordsController, type: :controller do
     let(:spent_record) { create(:spent_record) }
     let(:params) { { id: spent_record.id, spent_record: { spent: 100 } } }
 
-    it { expect(response).to have_http_status(:see_other) }
+    it { expect(response).to have_http_status(:ok) }
     it { expect(assigns[:spent_record].spent).to eq(100) }
-    it { is_expected.to redirect_to(root_path) }
   end
 
   describe '#destroy' do
