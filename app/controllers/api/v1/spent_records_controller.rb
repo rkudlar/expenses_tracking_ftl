@@ -19,7 +19,7 @@ module Api
       end
 
       def destroy
-        spent_record.destroy!
+        spent_record.destroy
       end
 
       private

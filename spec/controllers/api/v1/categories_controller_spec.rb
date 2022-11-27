@@ -4,7 +4,7 @@ RSpec.describe Api::V1::CategoriesController, type: :controller do
   render_views
 
   describe '#index' do
-    context 'when the user is authorized' do
+    context 'when the user is authenticated' do
       let!(:category) { create(:category) }
 
       before do
@@ -18,7 +18,7 @@ RSpec.describe Api::V1::CategoriesController, type: :controller do
       it { expect(response.media_type).to eq('application/json') }
     end
 
-    context 'when the user is not authorized' do
+    context 'when the user is not authenticated' do
       before do
         get :index, format: 'json'
       end

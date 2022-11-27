@@ -4,13 +4,14 @@ RSpec.describe Api::V1::SpentRecordsController, type: :controller do
   render_views
 
   describe '#index' do
-    context 'when the user is authorized' do
+    context 'when the user is authenticated' do
+      let!(:user) { create(:user) }
+      let!(:spent_record) { create(:spent_record, user_id: user.id) }
+
       before do
-        sign_in spent_record.user
+        sign_in user
         get :index, format: 'json'
       end
-
-      let(:spent_record) { create(:spent_record) }
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(response.body).to include(spent_record.spent.to_s) }
@@ -19,7 +20,7 @@ RSpec.describe Api::V1::SpentRecordsController, type: :controller do
       it { expect(response.media_type).to eq('application/json') }
     end
 
-    context 'when the user is not authorized' do
+    context 'when the user is not authenticated' do
       before do
         get :index, format: 'json'
       end
@@ -30,11 +31,12 @@ RSpec.describe Api::V1::SpentRecordsController, type: :controller do
 
   describe '#edit' do
     before do
-      sign_in spent_record.user
+      sign_in user
       get :edit, params: { id: spent_record.id }, format: 'json'
     end
 
-    let(:spent_record) { create(:spent_record) }
+    let(:user) { create(:user) }
+    let(:spent_record) { create(:spent_record, user_id: user.id) }
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response.body).to include(spent_record.spent.to_s) }
@@ -63,11 +65,12 @@ RSpec.describe Api::V1::SpentRecordsController, type: :controller do
 
   describe '#update' do
     before do
-      sign_in spent_record.user
+      sign_in user
       patch :update, params: params
     end
 
-    let(:spent_record) { create(:spent_record) }
+    let(:user) { create(:user) }
+    let(:spent_record) { create(:spent_record, user_id: user.id) }
     let(:params) { { id: spent_record.id, spent_record: { spent: 100 } } }
 
     it { expect(response).to have_http_status(:ok) }
@@ -76,10 +79,11 @@ RSpec.describe Api::V1::SpentRecordsController, type: :controller do
 
   describe '#destroy' do
     before do
-      sign_in spent_record.user
+      sign_in user
     end
 
-    let!(:spent_record) { create(:spent_record) }
+    let!(:user) { create(:user) }
+    let!(:spent_record) { create(:spent_record, user_id: user.id) }
 
     it { expect { delete :destroy, params: { id: spent_record.id } }.to change(SpentRecord, :count).by(-1) }
   end

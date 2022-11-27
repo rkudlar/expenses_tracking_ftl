@@ -10,7 +10,7 @@ class SpentRecordsService < ApplicationService
     if @params[:owner_id].nil?
       records_mapper(@current_user)
     else
-      owner = User.find(@params[:owner_id].to_i)
+      owner = User.find(@params[:owner_id])
       return unless owner.share_with.include? @current_user.id
 
       records_mapper(owner)
