@@ -17,7 +17,7 @@ function Home() {
   return (
     <div>
       <Header />
-      <Records records={records} />
+      <Records records={records} owner={true}/>
     </div>
   );
 }
