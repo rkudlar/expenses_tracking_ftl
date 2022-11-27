@@ -1,25 +1,29 @@
 class RecordsService < ApplicationService
-  def initialize(owner_id, current_user)
+  def initialize(params, current_user)
     super
-    @current_user_id = current_user.id
-    @owner = User.find(owner_id.to_i) unless owner_id.nil?
+    @current_user = current_user
+    @params = params
+    @category_id = JSON.parse(params[:category])['id'] unless params[:category].blank?
   end
 
   def call
-    if @owner.nil?
-      my_records
+    if @params[:owner_id].nil?
+      records_mapper(@current_user)
     else
-      shared_with_me_records
+      owner = User.find(@params[:owner_id].to_i)
+      return unless owner.share_with.include? @current_user.id
+
+      records_mapper(owner)
     end
   end
 
   private
 
-  def my_records
-    Record.where(user_id: @current_user_id).order('created_at DESC')
-  end
-
-  def shared_with_me_records
-    @owner.records.order('created_at DESC') if @owner.share_with.include? @current_user_id
+  def records_mapper(user)
+    user.records.order('created_at DESC').select do |record|
+      (!@params[:from].blank? ? record.spent >= @params[:from].to_i : true) &&
+      (!@params[:to].blank? ? record.spent <= @params[:to].to_i : true) &&
+      (!@category_id.blank? ? record.category_id == @category_id : true)
+    end
   end
 end

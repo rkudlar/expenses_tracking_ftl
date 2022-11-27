@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import Records from "../components/Records/Records";
 import axios from "axios";
 import { BACKEND_PATHS } from "../packs/constants";
+import Filter from "../components/Records/Filter";
 
 function Home() {
   const [records, setRecords] = useState([]);
@@ -17,6 +18,7 @@ function Home() {
   return (
     <div>
       <Header />
+      <Filter stateChangerRecords={setRecords} />
       <Records records={records} owner={true}/>
     </div>
   );

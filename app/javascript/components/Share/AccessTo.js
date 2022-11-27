@@ -3,10 +3,12 @@
   import { BACKEND_PATHS } from "../../packs/constants";
   import { Button } from "react-bootstrap";
   import Records from "../Records/Records";
+  import Filter from "../Records/Filter";
 
   function AccessTo() {
     const [accessTo, setAccessTo] = useState([]);
     const [records, setRecords] = useState([]);
+    const [ownerId, setOwnerId] = useState("");
 
     const checkingExpenses = id => {
       axios.get(`${BACKEND_PATHS.RECORDS}`, {
@@ -15,6 +17,7 @@
         }
       }).then((response) => {
         setRecords(response.data);
+        setOwnerId(id)
       })
         .catch(function(error){
           console.log(error)
@@ -56,6 +59,7 @@
             </tbody>
           </table>
         </div>
+        <Filter stateChangerRecords={setRecords} ownerId={ownerId} />
         <Records records={records} owner={false} />
       </>
     );

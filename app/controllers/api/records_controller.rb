@@ -1,7 +1,7 @@
 module Api
   class RecordsController < ApplicationController
     def index
-      @records = RecordsService.call(params[:owner_id], current_user)
+      @records = RecordsService.call(params, current_user)
     end
 
     def edit
