@@ -4,20 +4,21 @@ import Nav from "react-bootstrap/Nav";
 
 import axios from "axios";
 
-import {Link} from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { BACKEND_PATHS, UI_PATHS } from "../../packs/constants";
 
 function Header() {
 
-  const handleSignOut = event => {
+  const handleSignOut = () => {
     const token = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
-    axios.delete('/users/sign_out', {
+    axios.delete(`${BACKEND_PATHS.USER_SIGN_OUT}`, {
     })
       .catch(function(error){
         console.log(error)
       })
       .then(function(){
-        window.location.href = '/user/sign_in'
+        window.location.href = `${BACKEND_PATHS.USER_SIGN_IN}`
       })
     return true
   }
@@ -33,7 +34,9 @@ function Header() {
       <Navbar bg="black" variant="dark">
         <Nav className="me-auto container-fluid">
           <div className="collapse navbar-collapse justify-content-md-center">
-            <button onClick={handleSignOut} className="btn custom-btn">Вихід</button>
+            <NavLink exact to={'/'} className="nav-link">Home</NavLink>
+            <NavLink exact to={`${UI_PATHS.RECORD_NEW}`} className="nav-link">Add record</NavLink>
+            <button onClick={handleSignOut} className="btn custom-btn">Exit</button>
           </div>
         </Nav>
       </Navbar>
