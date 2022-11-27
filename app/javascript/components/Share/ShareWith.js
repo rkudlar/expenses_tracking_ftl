@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND_PATHS } from "../../packs/constants";
-import {Button, Container, Form} from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import FlashMessage from 'react-flash-message';
 
 function ShareWith() {
   const [shareWith, setShareWith] = useState([]);
   const [username, setUsername] = useState('');
   const [submitRequested, setSubmitRequested] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setShowSuccessMessage(false);
+    setShowErrorMessage(false);
     const token = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
     axios.patch(`${BACKEND_PATHS.START_SHARING}`, {
       username: username
-    }).then(() => {
+    }).then((response) => {
       setSubmitRequested(true);
       setUsername('')
+      if (response.status === 200) {
+        setShowSuccessMessage(true)
+      }
+      else {
+        setShowErrorMessage(true)
+      }
     })
       .catch(function(error){
         console.log(error)
@@ -45,6 +56,24 @@ function ShareWith() {
 
   return (
     <>
+      { showSuccessMessage &&
+          <div>
+            <FlashMessage duration={5000}>
+              <div className="alert alert-success mt-2" role="alert">
+                User added !
+              </div>
+            </FlashMessage>
+          </div>
+      }
+      { showErrorMessage &&
+          <div>
+            <FlashMessage duration={5000}>
+              <div className="alert alert-danger mt-2" role="alert">
+                Invalid username !
+              </div>
+            </FlashMessage>
+          </div>
+      }
       <Form onSubmit={onSubmit} className="mt-3">
         <div className="row g-2">
           <div className="col-4">

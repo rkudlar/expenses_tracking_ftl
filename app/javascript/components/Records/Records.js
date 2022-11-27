@@ -28,7 +28,10 @@ function Records(props) {
                 {props.owner ? <th scope="col">Actions</th> : null}
               </tr>
               </thead>
-              {props.owner ? <MapperOwner records={props.records} /> : <MapperSharing records={props.records} />}
+              {props.owner ?
+                  <MapperOwner recordChanger={props.recordsChanger} records={props.records} />
+                  :
+                  <MapperSharing records={props.records} />}
             </table>
           </Container>
       }

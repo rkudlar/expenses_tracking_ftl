@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :records
+  has_many :spent_records
 
   validates :email, uniqueness: true
   validates :username, uniqueness: true, length: { minimum: 5 }
